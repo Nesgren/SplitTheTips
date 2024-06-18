@@ -9,7 +9,7 @@ interface EmployeeFormProps {
 }
 
 const EmployeeForm: React.FC<EmployeeFormProps> = ({ areas, agregarEmpleado, mostrarMensaje }) => {
-  const [nuevoEmpleado, setNuevoEmpleado] = useState({ area: '', nombre: '', horas: 0 });
+  const [nuevoEmpleado, setNuevoEmpleado] = useState({ area: '', nombre: '', horas: NaN });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

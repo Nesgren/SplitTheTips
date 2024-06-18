@@ -33,12 +33,12 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--clr-secondary); /* Uso de la variable de color secundario */
+  color: #c01313; /* Uso de la variable de color secundario */
   transition: color 0.5s ease;
 }
 
 .delete-area-button:hover {
-  color: var(--clr-secondary-hover); /* Uso de la variable de color secundario en hover */
+  color: #da6565; /* Uso de la variable de color secundario en hover */
 }
 
 .grid-container {

@@ -14,7 +14,7 @@ interface AreaFormProps {
 }
 
 const AreaForm: React.FC<AreaFormProps> = ({ agregarArea, mostrarMensaje, areasExistente }) => {
-  const [nuevaArea, setNuevaArea] = useState<Area>({ nombre: '', porcentaje: 0 });
+  const [nuevaArea, setNuevaArea] = useState<Area>({ nombre: '', porcentaje: NaN });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
