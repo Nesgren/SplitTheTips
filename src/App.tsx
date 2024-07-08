@@ -6,11 +6,11 @@ import ErrorMessage from './components/ErrorMessage';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
+// Definimos el valor máximo permitido para el porcentaje total de áreas
 const MAX_PERCENTAGE = 100;
 
-
-
 const App: React.FC = () => {
+  // Definimos el tipo para una área con su porcentaje y lista de empleados
   type Area = {
     porcentaje: number;
     empleados: {
@@ -19,14 +19,21 @@ const App: React.FC = () => {
       propinas: number;
     }[];
   };
-  
+
+  // Estado para almacenar las áreas
   const [areas, setAreas] = useState<Record<string, Area>>({});
-  
+
+  // Estado para almacenar el total de propinas
   const [totalPropinas, setTotalPropinas] = useState<number>(0);
+
+  // Estado para almacenar los mensajes de error
   const [mensajeError, setMensajeError] = useState<string>('');
+
+  // Estados para controlar la visibilidad de los formularios
   const [mostrarAgregarArea, setMostrarAgregarArea] = useState<boolean>(false);
   const [mostrarAgregarEmpleado, setMostrarAgregarEmpleado] = useState<boolean>(false);
 
+  // useEffect para cargar las áreas desde el localStorage al montar el componente
   useEffect(() => {
     const cargarAreasDesdeLocalStorage = () => {
       try {
@@ -44,14 +51,16 @@ const App: React.FC = () => {
     }
   }, []);
 
+  // Función para guardar las áreas en el localStorage
   const guardarAreasEnLocalStorage = (nuevasAreas: Record<string, Area>) => {
     try {
       localStorage.setItem('areas', JSON.stringify(nuevasAreas));
     } catch (error) {
       console.error('Error al guardar en localStorage:', error);
     }
-  };  
+  };
 
+  // Función para mostrar mensajes de error por un tiempo determinado
   const mostrarMensaje = (mensaje: string) => {
     setMensajeError(mensaje);
     setTimeout(() => {
@@ -59,6 +68,7 @@ const App: React.FC = () => {
     }, 3000);
   };
 
+  // Función para agregar una nueva área
   const agregarArea = (nuevaArea: { nombre: string; porcentaje: number }) => {
     const { nombre, porcentaje } = nuevaArea;
     if (!nombre.trim() || isNaN(porcentaje) || porcentaje === 0) {
@@ -77,6 +87,7 @@ const App: React.FC = () => {
     mostrarMensaje("Área agregada exitosamente.");
   };
 
+  // Función para agregar un nuevo empleado a una área
   const agregarEmpleado = (nuevoEmpleado: { area: string; nombre: string; horas: number }) => {
     const { area, nombre, horas } = nuevoEmpleado;
     if (!area || !nombre.trim() || isNaN(horas) || horas === 0) {
@@ -101,6 +112,7 @@ const App: React.FC = () => {
     mostrarMensaje("Empleado agregado exitosamente.");
   };
 
+  // Función para eliminar una área
   const eliminarArea = (nombreArea: string) => {
     const nuevasAreas = { ...areas };
     delete nuevasAreas[nombreArea];
@@ -108,12 +120,13 @@ const App: React.FC = () => {
     mostrarMensaje("Área eliminada exitosamente.");
   };
 
+  // Función para actualizar el estado de las áreas y guardar en localStorage
   const actualizarAreas = (nuevasAreas: Record<string, Area>) => {
     setAreas(nuevasAreas);
     guardarAreasEnLocalStorage(nuevasAreas);
   };
-  
 
+  // Función para editar los datos de un empleado
   const editarEmpleado = (area: string, index: number, field: string, value: string | number) => {
     const nuevasAreas = { ...areas };
     if (field === 'nombre') {
@@ -125,6 +138,7 @@ const App: React.FC = () => {
     mostrarMensaje("Empleado actualizado exitosamente.");
   };
 
+  // Función para eliminar un empleado de una área
   const eliminarEmpleado = (area: string, index: number) => {
     const nuevasAreas = { ...areas };
     nuevasAreas[area].empleados.splice(index, 1);
@@ -132,6 +146,7 @@ const App: React.FC = () => {
     mostrarMensaje("Empleado eliminado exitosamente.");
   };
 
+  // Función para calcular la distribución de las propinas entre los empleados
   const calcularDistribucion = () => {
     const totalPorcentaje = Object.values(areas).reduce((acc, curr) => acc + curr.porcentaje, 0);
     if (totalPorcentaje !== MAX_PERCENTAGE) {
@@ -221,7 +236,7 @@ const App: React.FC = () => {
                   onChange={(e) => {
                     const inputValue = e.target.value.trim();
                     setTotalPropinas(inputValue === '' ? 0 : parseFloat(inputValue));
-                  }}                  
+                  }}
                   placeholder="Total de Propinas"
                 />
                 <label htmlFor="number">Total de propinas</label>

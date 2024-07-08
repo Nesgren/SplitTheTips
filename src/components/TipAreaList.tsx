@@ -3,40 +3,49 @@ import { motion } from 'framer-motion';
 import { XCircle } from 'react-feather';
 import './TipAreaList.css';
 
+// Definimos la interfaz para un empleado
 interface Employee {
   nombre: string;
   horas: number;
   propinas: number;
 }
 
+// Definimos la interfaz para los datos de un área
 interface AreaData {
   porcentaje: number;
   empleados: Employee[];
 }
 
+// Definimos la interfaz para las props del componente TipAreaList
 interface TipAreaListProps {
-  areas: Record<string, AreaData>;
-  eliminarArea: (nombreArea: string) => void;
-  editarEmpleado: (area: string, index: number, field: string, value: string | number) => void;
-  eliminarEmpleado: (area: string, index: number) => void;
+  areas: Record<string, AreaData>; // Lista de áreas
+  eliminarArea: (nombreArea: string) => void; // Función para eliminar un área
+  editarEmpleado: (area: string, index: number, field: string, value: string | number) => void; // Función para editar un empleado
+  eliminarEmpleado: (area: string, index: number) => void; // Función para eliminar un empleado
 }
 
+// Componente funcional TipAreaList
 const TipAreaList: React.FC<TipAreaListProps> = ({ areas, eliminarArea, editarEmpleado, eliminarEmpleado }) => {
+  // Estado para controlar el índice del empleado en edición
   const [editingEmployeeIndex, setEditingEmployeeIndex] = useState<{ area: string; index: number } | null>(null);
 
+  // Maneja la edición de un empleado
   const handleEditEmployee = (area: string, index: number) => {
     setEditingEmployeeIndex({ area, index });
   };
 
+  // Cancela la edición de un empleado
   const cancelEditEmployee = () => {
     setEditingEmployeeIndex(null);
   };
 
+  // Guarda los cambios en el empleado editado
   const saveEditedEmployee = (area: string, index: number, field: string, value: string | number) => {
     editarEmpleado(area, index, field, value);
     setEditingEmployeeIndex(null);
   };
 
+  // Renderiza las acciones (editar/guardar/cancelar/eliminar) para un empleado
   const renderEmployeeActions = (nombreArea: string, index: number, empleado: Employee) => {
     if (editingEmployeeIndex?.area === nombreArea && editingEmployeeIndex.index === index) {
       return (
@@ -65,6 +74,7 @@ const TipAreaList: React.FC<TipAreaListProps> = ({ areas, eliminarArea, editarEm
     }
   };
 
+  // Renderizado del componente
   return (
     <div className="tip-area-list">
       {Object.entries(areas).map(([nombreArea, datosArea]) => (

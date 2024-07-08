@@ -2,30 +2,36 @@ import React from 'react';
 import { XCircle } from 'react-feather';
 import './TipArea.css';
 
+// Definimos la interfaz para las props del componente TipArea
 interface TipAreaProps {
-  area: string;
-  data: Area;
-  eliminarArea: (nombreArea: string) => void;
-  actualizarHoras: (area: string, index: number, horas: number) => void;
+  area: string; // Nombre del área
+  data: Area; // Datos del área
+  eliminarArea: (nombreArea: string) => void; // Función para eliminar un área
+  actualizarHoras: (area: string, index: number, horas: number) => void; // Función para actualizar las horas trabajadas
 }
 
+// Definimos la interfaz para un área
 interface Area {
-  porcentaje: number;
-  empleados: Employee[];
+  porcentaje: number; // Porcentaje del área
+  empleados: Employee[]; // Lista de empleados en el área
 }
 
+// Definimos la interfaz para un empleado
 interface Employee {
-  nombre: string;
-  horas: number;
-  propinas: number;
+  nombre: string; // Nombre del empleado
+  horas: number; // Horas trabajadas por el empleado
+  propinas: number; // Propinas asignadas al empleado
 }
 
+// Componente funcional TipArea
 const TipArea: React.FC<TipAreaProps> = ({ area, data, eliminarArea, actualizarHoras }) => {
+  // Manejador de cambio de horas trabajadas
   const handleHorasChange = (index: number, value: string) => {
-    const nuevasHoras = parseFloat(value) || 0;
-    actualizarHoras(area, index, nuevasHoras);
+    const nuevasHoras = parseFloat(value) || 0; // Convertir el valor a número, o 0 si no es válido
+    actualizarHoras(area, index, nuevasHoras); // Actualizar las horas trabajadas
   };
 
+  // Renderizado del componente
   return (
     <div className="custom-tip-area">
       <div className="tip-area-header">

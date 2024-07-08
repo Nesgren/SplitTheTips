@@ -2,31 +2,30 @@ import React from 'react';
 import './TipCalculator.css';
 import EmployeeForm from './EmployeeForm';
 
+// Definimos la interfaz para las props del componente TipCalculator
 interface TipCalculatorProps {
   areas: Record<string, { porcentaje: number; empleados: { nombre: string; horas: number; propinas: number }[] }>;
 }
 
+// Componente funcional TipCalculator
 const TipCalculator: React.FC<TipCalculatorProps> = ({ areas }) => {
+  // Función para agregar un nuevo empleado
   const agregarEmpleado = (nuevoEmpleado: { area: string; nombre: string; horas: number }) => {
-    // Lógica para agregar un nuevo empleado
     console.log(`Nuevo empleado agregado: ${nuevoEmpleado.nombre}`);
-
-    // Actualizar el estado de áreas (ejemplo)
-    // Esto dependerá de cómo manejes el estado de áreas en tu aplicación
-    // Aquí asumimos que el estado de áreas se maneja fuera de este componente
   };
 
-  // Convertir el objeto areas en un array de strings
+  // Obtenemos un array con los nombres de las áreas
   const areasArray = Object.keys(areas);
 
+  // Renderizado del componente
   return (
     <div className="tip-calculator">
       <h1>Calculadora de Propinas</h1>
       <EmployeeForm
-        areas={areasArray}
-        agregarEmpleado={agregarEmpleado}
+        areas={areasArray} // Pasamos el array de áreas al componente EmployeeForm
+        agregarEmpleado={agregarEmpleado} // Pasamos la función para agregar empleado al componente EmployeeForm
         mostrarMensaje={(mensaje) => {
-          console.error(`Error: ${mensaje}`); // Ejemplo básico de manejo de mensaje de error
+          console.error(`Error: ${mensaje}`); // Mostramos un mensaje de error en la consola
         }}
       />
     </div>
