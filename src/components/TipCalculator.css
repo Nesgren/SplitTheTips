@@ -1,19 +1,19 @@
 /* TipCalculator.css */
 
-.form-title {
+.tip-calculator-container .form-title {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--clr-text);
 }
 
-.form-space {
+.tip-calculator-container .form-space {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.form-input {
+.tip-calculator-container .form-input {
     border: 1px solid var(--clr-input-border);
     border-radius: 0.25rem;
     color: var(--clr-text); 
@@ -22,11 +22,11 @@
     width: 100%;
 }
 
-.form-input::placeholder {
-    color: var(--clr-placeholder); 
+.tip-calculator-container .form-input::placeholder {
+    color: var(--clr-input-label);
 }
 
-.form-button {
+.tip-calculator-container .form-button {
     background-color: var(--clr-button); 
     color: var(--clr-text); 
     padding: 0.75rem;
@@ -37,6 +37,6 @@
     transition: background-color 0.5s ease-in-out;
 }
 
-.form-button:hover {
+.tip-calculator-container .form-button:hover {
     background-color: var(--clr-button-hover); 
 }

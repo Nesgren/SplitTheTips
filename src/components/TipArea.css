@@ -1,6 +1,6 @@
 /* TipArea.css */
 
-.custom-tip-area {
+.tip-area-container .custom-tip-area {
   border-radius: 8px;
   background-color: var(--clr-form);
   padding: 20px;
@@ -8,20 +8,20 @@
   margin-top: 2rem;
 }
 
-.tip-area-header {
+.tip-area-container .tip-area-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
 }
 
-.area-title {
+.tip-area-container .area-title {
   margin: 0;
   font-size: 1.5rem;
   color: var(--clr-text);
 }
 
-.delete-button {
+.tip-area-container .delete-button {
   background: none;
   border: none;
   cursor: pointer;
@@ -29,61 +29,61 @@
   transition: color 0.3s ease;
 }
 
-.delete-button:hover {
-  color: var(--clr-secondary-hover); /* Ajuste para el color de hover */
+.tip-area-container .delete-button:hover {
+  color: var(--clr-button-hover); /* Ajuste para el color de hover */
 }
 
-.employee-list {
+.tip-area-container .employee-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
 }
 
-.employee-info {
+.tip-area-container .employee-info {
   border-radius: 8px;
   background-color: var(--clr-list-item);
   padding: 15px;
   box-shadow: 0 2px 4px var(--clr-list-item-shadow);
 }
 
-.employee-details {
+.tip-area-container .employee-details {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.employee-name {
+.tip-area-container .employee-name {
   font-weight: bold;
   color: var(--clr-text);
 }
 
-.hours-input {
+.tip-area-container .hours-input {
   padding: 8px;
   border: 1px solid var(--clr-input-border);
   border-radius: 4px;
 }
 
-.tips-amount {
+.tip-area-container .tips-amount {
   margin: 5px 0;
   color: var(--clr-text);
 }
 
-.details-labels {
+.tip-area-container .details-labels {
   display: flex;
   justify-content: space-between;
-  color: var(--clr-labels-text); /* Ajuste para el color de texto de etiquetas */
+  color: var(--clr-input-label); /* Ajuste para el color de texto de etiquetas */
   font-size: 0.9rem;
 }
 
-.hours-label,
-.tips-label {
+.tip-area-container .hours-label,
+.tip-area-container .tips-label {
   flex-basis: 50%;
 }
 
-.hours-label {
+.tip-area-container .hours-label {
   text-align: left;
 }
 
-.tips-label {
+.tip-area-container .tips-label {
   text-align: right;
 }

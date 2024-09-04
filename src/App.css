@@ -1,14 +1,24 @@
-/* General Styles */
-.app-container {
-  background-color: var(--clr-background);
-  min-height: auto;
-  font-family: "Kanit", sans-serif;
-  color: var(--clr-text);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  width: fit-content;
+:root {
+  --clr-primary: #ff8a65; /* Rojo intenso */
+  --clr-secondary: #ff8a65; /* Coral */
+  --clr-background: #1d1d1d5d; /* Gris muy claro */
+  --clr-text: #131313; /* Gris oscuro */
+  --clr-accent: #9e9e9e; /* Gris medio */
+  --clr-button: #ff8a65; /* Naranja claro */
+  --clr-button-hover: #e64a19; /* Naranja oscuro */
+  --clr-form: #ffffff; /* Blanco */
+  --clr-list-item: #ffffff; /* Blanco */
+  --clr-list-item-shadow: rgba(0, 0, 0, 0.2); /* Sombra de los elementos de la lista */
+  --clr-toggle-off: #b0bec5; /* Gris claro */
+  --clr-toggle-on: #ff5722; /* Naranja intenso */
+  --clr-toggle-thumb: #ffffff; /* Blanco (color del botón del toggle) */
+  --clr-input-border: #e0e0e0; /* Gris claro */
+  --clr-input-label: #757575; /* Gris oscuro */
+  --clr-input-label-focus: #333333; /* Gris oscuro */
+  --clr-input-underline: #d32f2f; /* Rojo intenso */
 }
+
+/* General Styles */
 
 *,
 *::before,
@@ -20,60 +30,39 @@
 
 body {
   background-color: var(--clr-background);
-  min-height: auto;
   font-family: "Kanit", sans-serif;
   color: var(--clr-text);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  width: 100%;
 }
 
 div {
   position: relative;
 }
 
-:root {
-  --clr-primary: #000000; /* Azul primario */
-  --clr-secondary: #7e98e0; /* Rojo secundario */
-  --clr-background: #b8d3ddd5; /* Gris claro */
-  --clr-text: #272727; /* Texto principal */
-  --clr-accent: #ffc107; /* Amarillo */
-  --clr-button: #82ade46b; /* Gris oscuro */
-  --clr-button-hover: #6887ee86; /* Gris más oscuro (hover) */
-  --clr-form: #8a4040; /* Blanco */
-  --clr-list-item: #ffffff; /* Blanco */
-  --clr-list-item-shadow: rgba(0, 0, 0, 0.1); /* Sombra de los elementos de la lista */
-  --clr-toggle-off: #6c757d; /* Gris */
-  --clr-toggle-on: #101110; /* Verde */
-  --clr-toggle-thumb: #ffffff; /* Blanco (color del botón del toggle) */
-  --clr-input-border: #ced4da; /* Gris claro */
-  --clr-input-label: #495057; /* Gris más oscuro */
-  --clr-input-label-focus: #495057; /* Gris más oscuro */
-  --clr-input-underline: #007bff; /* Azul primario (color de la línea bajo el input) */
-}
-
 /* Header Styles */
 header {
   text-align: center;
   padding-bottom: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Content Styles */
 .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 1000px;
-  margin: auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 /* Action Styles */
 .actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -81,9 +70,9 @@ header {
 .add-button,
 .custom-button {
   background-color: var(--clr-button);
-  border: 1px solid transparent; /* Corregido */
+  border: 1px solid transparent;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  color: var(--clr-text);
+  color: #333333;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -204,10 +193,10 @@ header {
 
 /* Title Styles */
 .app-title {
-  font-size: 3rem;
+  font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  line-height: 60px;
+  line-height: 40px;
   cursor: pointer;
 }
 
@@ -240,23 +229,28 @@ header {
 /* Input Styles */
 .input-wrapper {
   position: relative;
-  font-size: 16px;
+  font-size: 18px; /* Aumentar el tamaño de la fuente del contenedor del input */
 }
 
 .input-wrapper input {
   all: unset;
-  width: 100%;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--clr-input-border);
+  margin-top: .5rem;
+  width: 98%;
+  padding: 15px; /* Aumentar el padding del campo de entrada */
+  border-radius: 5px; /* Añadir bordes redondeados */
+  font-size: 18px; /* Aumentar el tamaño de la fuente dentro del campo de entrada */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.356); /* Agregar una sombra sutil */
+  background-color: #ffffff4d;
 }
 
 .input-wrapper label {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px; /* Ajustar la posición del label si es necesario */
   left: 0;
   color: var(--clr-input-label);
   pointer-events: none;
   transition: all 0.3s ease;
+  font-size: 30px; /* Aumentar el tamaño de la fuente del label */
 }
 
 .input-wrapper input:is(:focus, :valid) ~ label {
@@ -284,14 +278,14 @@ header {
 }
 
 .box {
-  background-color: #ffffff54;
+  background-color: var(--clr-background);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.219);
-  margin-bottom: 1rem;
   width: 100%;
 }
 
 .box-content {
   width: 100%;
 }
+

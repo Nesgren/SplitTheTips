@@ -1,63 +1,97 @@
-// AreaForm.tsx
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import './AreaForm.css';
 
-// Definimos la interfaz para un área con nombre y porcentaje
 interface Area {
   nombre: string;
   porcentaje: number;
 }
 
-// Definimos la interfaz para las props del componente AreaForm
 interface AreaFormProps {
   agregarArea: (nuevaArea: Area) => void;
   mostrarMensaje: (mensaje: string) => void;
   areasExistente: Area[];
 }
 
-// Componente funcional AreaForm
 const AreaForm: React.FC<AreaFormProps> = ({ agregarArea, mostrarMensaje, areasExistente }) => {
-  // Estado para la nueva área a agregar
   const [nuevaArea, setNuevaArea] = useState<Area>({ nombre: '', porcentaje: NaN });
-
-  // Manejador de envío del formulario
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  
+  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { nombre, porcentaje } = nuevaArea;
 
-    // Validación de los campos del formulario
-    if (!nombre.trim() || isNaN(porcentaje) || porcentaje < 0 || porcentaje > 100) {
-      mostrarMensaje("Por favor, complete todos los campos correctamente y asegúrese de que el porcentaje esté entre 0 y 100.");
+    if (!nombre.trim()) {
+      mostrarMensaje("El nombre del área no puede estar vacío.");
       return;
     }
 
-    // Verificar si el nombre del área ya existe
+    if (isNaN(porcentaje)) {
+      mostrarMensaje("El porcentaje debe ser un número válido.");
+      return;
+    }
+
+    if (porcentaje < 0 || porcentaje > 100) {
+      mostrarMensaje("El porcentaje debe estar entre 0 y 100.");
+      return;
+    }
+
     if (areasExistente.some(area => area.nombre === nombre)) {
       mostrarMensaje("El nombre del área ya existe. Por favor, elija un nombre único.");
       return;
     }
 
-    // Agregar la nueva área y resetear el formulario
+    // Verificar si el porcentaje es 0 o un valor no válido
+    if (porcentaje === 0) {
+      mostrarMensaje("El porcentaje debe ser mayor que 0.");
+      return;
+    }
+
+    // Verificar si el porcentaje excede el límite permitido
+    const totalPorcentajeExistente = areasExistente.reduce((sum, area) => sum + area.porcentaje, 0);
+    if (totalPorcentajeExistente + porcentaje > 100) {
+      mostrarMensaje("La suma total de los porcentajes no puede exceder el 100%.");
+      return;
+    }
+
     agregarArea(nuevaArea);
     setNuevaArea({ nombre: '', porcentaje: 0 });
-  };
+  }, [nuevaArea, agregarArea, mostrarMensaje, areasExistente]);
 
-  
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (name === 'nombre') {
+      setNuevaArea(prev => ({ ...prev, [name]: value }));
+    } else if (name === 'porcentaje') {
+      let porcentaje = parseFloat(value);
+      // Calcular el total actual de porcentajes de las áreas existentes
+      const totalPorcentajeExistente = areasExistente.reduce((sum, area) => sum + area.porcentaje, 0);
+      // Asegurarse de que el porcentaje no exceda el límite disponible
+      if (totalPorcentajeExistente + porcentaje > 100) {
+        porcentaje = 100 - totalPorcentajeExistente;
+      }
+      setNuevaArea(prev => ({ ...prev, [name]: isNaN(porcentaje) ? 0 : porcentaje }));
+    }
+  }, [areasExistente]);
+
   return (
     <form onSubmit={handleSubmit} className="area-form-container">
       <input
         type="text"
+        name="nombre"
         value={nuevaArea.nombre}
-        onChange={(e) => setNuevaArea({ ...nuevaArea, nombre: e.target.value })}
+        onChange={handleInputChange}
         className="custom-input"
         placeholder="Nombre del Área"
       />
       <input
         type="number"
+        name="porcentaje"
         value={nuevaArea.porcentaje.toString()}
-        onChange={(e) => setNuevaArea({ ...nuevaArea, porcentaje: parseFloat(e.target.value) })}
+        onChange={handleInputChange}
         className="custom-input"
         placeholder="Porcentaje (%)"
+        min="0"
+        max="100"
       />
       <button type="submit" className="custom-button">
         Agregar Área

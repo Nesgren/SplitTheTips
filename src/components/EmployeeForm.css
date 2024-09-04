@@ -6,8 +6,8 @@
   gap: 1rem;
 }
 
-.custom-select,
-.custom-input {
+.employee-form-container .custom-select,
+.employee-form-container .custom-input {
   border: 1px solid var(--clr-input-border);
   color: var(--clr-text);
   border-radius: 0.25rem;
@@ -16,18 +16,18 @@
   transition: border-color 0.2s ease-in-out;
 }
 
-.custom-input::placeholder {
+.employee-form-container .custom-input::placeholder {
   color: #888;
 }
 
-.custom-input:focus,
-.custom-select:focus {
+.employee-form-container .custom-input:focus,
+.employee-form-container .custom-select:focus {
   border-color: var(--clr-input-underline);
 }
 
-.custom-button {
+.employee-form-container .custom-button {
   background-color: var(--clr-button);
-  color: white;
+  color: var(--clr-text);
   padding: 0.75rem 1.5rem;
   border-radius: 0.25rem;
   cursor: pointer;
@@ -36,11 +36,11 @@
   transition: background-color 0.15s ease-in-out, transform 0.1s ease-in-out;
 }
 
-.custom-button:hover {
+.employee-form-container .custom-button:hover {
   background-color: var(--clr-button-hover);
   transform: translateY(-2px);
 }
 
-.custom-button:active {
+.employee-form-container .custom-button:active {
   transform: translateY(1px);
 }

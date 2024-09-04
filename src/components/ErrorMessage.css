@@ -1,6 +1,6 @@
 /* ErrorMessage.css */
 
-.custom-error-message {
+.error-message-container .custom-error-message {
     background-color: var(--clr-secondary);
     color: var(--clr-text);
     padding: 0.5rem 1rem;
@@ -17,7 +17,7 @@
     text-align: center;
 }
 
-.custom-error-message.show {
+.error-message-container .custom-error-message.show {
     opacity: 1;
     transform: translateY(0);
 }
